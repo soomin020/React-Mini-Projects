@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  color: #1f2937;
+  background: linear-gradient(135deg, #3b2fa0 0%, #5b4bd6 50%, #3b2fa0 100%);
+  background-attachment: fixed;
+}
+
+button,
+input {
+  font-family: inherit;
+}
