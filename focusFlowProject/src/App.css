@@ -1,0 +1,423 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
+/* =========================
+   1. 기본 설정
+========================= */
+:root {
+  font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
+  color: #27243a;
+  background: #f7f6fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  --primary: #7866e8;
+  --primary-hover: #6653d5;
+  --text: #27243a;
+  --muted: #9290a3;
+  --border: #eeecf4;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #c9c0ff;
+  outline-offset: 2px;
+}
+
+/* =========================
+   2. 전체 레이아웃
+========================= */
+#root {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 56px 28px 80px;
+}
+
+/* =========================
+   3. 헤더
+========================= */
+.main-header {
+  margin-bottom: 32px;
+}
+
+.header-date {
+  margin: 0 0 12px;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header-title {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(30px, 5vw, 42px);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+}
+
+.header-subtitle {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* =========================
+   4. 통계 카드 3개 가로 배치
+========================= */
+.progress-part {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 42px;
+}
+
+.progress-all,
+.progress-completed,
+.progress-progress {
+  flex: 1;
+  min-width: 0;
+  padding: 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(48, 39, 95, 0.025);
+}
+
+.progress-part p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.progress-part h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+/* =========================
+   5. 할 일 목록 영역
+========================= */
+.task-part {
+  padding: 28px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: 0 8px 35px rgba(48, 39, 95, 0.035);
+}
+
+.task-part > h1 {
+  display: inline-block;
+  margin: 0 0 24px;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+}
+
+.add-task-btn {
+  float: right;
+  padding: 11px 17px;
+  color: var(--white);
+  background: var(--primary);
+  border: none;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 5px 12px rgba(120, 102, 232, 0.2);
+}
+
+.add-task-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   6. 할 일 카드
+========================= */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 0;
+  border-top: 1px solid #f1eff6;
+}
+
+.task-item input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.task-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-content h3 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.task-content p {
+  display: inline-block;
+  margin: 7px 0 0;
+  padding: 4px 9px;
+  color: #7765c9;
+  background: #f1efff;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.task-status p {
+  margin: 0;
+  padding: 6px 10px;
+  color: #9b8a40;
+  background: #fff8df;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 완료 상태 */
+.task-item:has(input[type="checkbox"]:checked) .task-content h3 {
+  color: #aaa7b8;
+  text-decoration: line-through;
+}
+
+.task-item:has(input[type="checkbox"]:checked) .task-status p {
+  color: #43896d;
+  background: #e8f7ef;
+}
+
+/* =========================
+   7. 수정 / 삭제 버튼
+========================= */
+.del-task-btn,
+.upt-task-btn {
+  flex-shrink: 0;
+  padding: 8px 11px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.del-task-btn {
+  color: #d56c7b;
+  background: #fff;
+}
+
+.del-task-btn:hover {
+  background: #fff0f2;
+  border-color: #f4c9d0;
+}
+
+.upt-task-btn {
+  color: #7062c5;
+  background: #f7f5ff;
+  border-color: #ece8ff;
+}
+
+.upt-task-btn:hover {
+  background: #ece8ff;
+}
+
+/* =========================
+   8. 모달 배경
+========================= */
+.modal-enterForm {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(32, 27, 54, 0.42);
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.2s ease;
+}
+
+/* =========================
+   9. 모달 폼
+========================= */
+.modal {
+  width: 100%;
+  max-width: 430px;
+  padding: 32px;
+  background: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  box-shadow: 0 24px 80px rgba(32, 27, 54, 0.2);
+  animation: modalIn 0.25s ease;
+}
+
+.modal h3 {
+  margin: 0 0 24px;
+  color: var(--text);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.7px;
+}
+
+.modal input {
+  display: block;
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 14px 15px;
+  color: var(--text);
+  background: #faf9fd;
+  border: 1px solid #e9e6f1;
+  border-radius: 12px;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal input::placeholder {
+  color: #aaa7b8;
+}
+
+.modal input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(120, 102, 232, 0.1);
+  outline: none;
+}
+
+.modal button[type="submit"] {
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px;
+  color: var(--white);
+  background: var(--primary);
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.modal button[type="submit"]:hover {
+  background: var(--primary-hover);
+}
+
+/* =========================
+   10. 애니메이션
+========================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================
+   11. 모바일 반응형
+========================= */
+@media (max-width: 600px) {
+  #root {
+    padding: 32px 16px 48px;
+  }
+
+  .progress-part {
+    gap: 9px;
+  }
+
+  .progress-all,
+  .progress-completed,
+  .progress-progress {
+    padding: 15px 10px;
+    border-radius: 15px;
+  }
+
+  .progress-part p {
+    font-size: 11px;
+  }
+
+  .progress-part h1 {
+    font-size: 24px;
+  }
+
+  .task-part {
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .task-part > h1 {
+    font-size: 20px;
+  }
+
+  .task-item {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .task-content {
+    flex-basis: calc(100% - 35px);
+  }
+
+  .task-status {
+    margin-left: 29px;
+  }
+
+  .del-task-btn,
+  .upt-task-btn {
+    padding: 8px 10px;
+  }
+
+  .modal {
+    padding: 25px 20px;
+    border-radius: 20px;
+  }
+}
